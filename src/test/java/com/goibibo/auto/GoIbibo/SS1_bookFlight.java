@@ -3,10 +3,12 @@ package com.goibibo.auto.GoIbibo;
 import java.io.IOException;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
 
 import com.goibibo.auto.pageObjects.checkoutPageObjects;
 import com.goibibo.auto.pageObjects.homePageObjects;
+import com.goibibo.auto.pageObjects.paymentPageObjects;
 
 import testData.travelerInformation;
 import utilities.Base;
@@ -19,6 +21,8 @@ public class SS1_bookFlight extends Base
 	{
 		driver=driverInitialize();
 		homePageObjects homeObjects = new homePageObjects(driver);
+		
+		//Get the names of cities
 		Cities cts = new Cities();
 		String fromCity = cts.getFromCity();
 		String toCity = cts.getToCity();
@@ -26,7 +30,7 @@ public class SS1_bookFlight extends Base
 		//click on roundTrip
 		homeObjects.clickOnRoundTrip();
 		
-		//Enter departure
+		//Enter departure city
 		homeObjects.getFromCityBox().sendKeys(fromCity);
 		@SuppressWarnings("deprecation")
 		WebDriverWait wait=new WebDriverWait(driver, 20);
@@ -34,7 +38,7 @@ public class SS1_bookFlight extends Base
 		homeObjects.getFromCityBox().sendKeys(Keys.DOWN);
 		homeObjects.getFromCityBox().sendKeys(Keys.ENTER);
 		
-		//Enter destination
+		//Enter destination city
 		homeObjects.getToCityBox().sendKeys(toCity);
 		wait.until(homeObjects.getWaitLocator());
 		homeObjects.getToCityBox().sendKeys(Keys.DOWN);
@@ -55,27 +59,36 @@ public class SS1_bookFlight extends Base
 		//Select flight with highest price
 		homeObjects.flightSelect();
 		
-		//GoIbibo webSite completely unresponsive beyond this point.
-		//Can select a flight but it does not load any more elements, making me unable to select on book flight option
-		//But I have written code logic to automate the elements once the WebSite goes live again.
-		//Just have to locate certain elements and add them to homePageObjects class
 		
-		//To pass traveler information from command line, we can use maven commands.
-		//mvn test -DtravelerName=typeNameHere -DtravelerEmail=typeEmailHere
-		//Then catch this information in our TestCse using Strings and pass these strings as arguments where we use sendKeys.
+		checkoutPageObjects checkout = new checkoutPageObjects(driver);
+		//Click on book flight
+		checkout.clickOnBook();
+		checkout.clickOnRiskTrip();
 		
-		checkoutPageObjects checkout = new checkoutPageObjects();
 		//enter traveler information
-		checkout.getNameBox().sendKeys(travelerInformation.getTravelerName());
+		checkout.clickOnTitle();
+		checkout.selectNameTitle();
+		checkout.getFirstNameBox().sendKeys(travelerInformation.getTravelerFirstName());
+		checkout.getLastNameBox().sendKeys(travelerInformation.getTravelerLastName());
 		checkout.getEmailBox().sendKeys(travelerInformation.getTravelerEmail());
-		//Any more details regarding the traveler can be added in the same way
+		checkout.getPhoneBox().sendKeys(travelerInformation.getTravelerPhone());
+		checkout.clickOnOkButton_covidInstructions();
+		checkout.clickOnProceedToPayment();
 		
-		//Finally locate the continue to pay button and click it
-		checkout.choosePayment();
-		checkout.chooseAmazonPay();
+		//Finish the purchase
+		paymentPageObjects payment = new paymentPageObjects(driver);
+		wait.until(payment.getWaitLocator());
+		payment.clickOnWallets();
 		
-		//The logic of this code will work 
-		//We just have to get locators for these webElements, which I could not do at this point because the WebSite is down 
+		//At this point, AmazonPay is the only option available and it is already selected and hence no user action is necessary.
+		//Stopping Automation here.
 		
+		//mvn commandLine to be used: mvn test -DtravelerFirstName=someFirstName -DtravelerLastName=someLastName -DtravelerEmail=someEmail -DtravelerPhone=somePhoneNumber
+	}
+	@AfterTest
+	public void cleanUp()
+	{
+		driver.manage().deleteAllCookies();
+		driver.quit();
 	}
 }

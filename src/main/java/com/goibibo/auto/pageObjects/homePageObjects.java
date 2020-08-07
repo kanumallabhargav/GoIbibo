@@ -16,8 +16,8 @@ public class homePageObjects
 	private By fromCity = By.id("gosuggest_inputSrc");
 	private By toCity = By.id("gosuggest_inputDest");
 	private ExpectedCondition<WebElement> waitLocator = ExpectedConditions.visibilityOfElementLocated(By.id("react-autosuggest-1"));
-	private By departureDate = By.id("fare_20200807");
-	private By returnDate = By.id("fare_20200813");
+	private By departureDate = By.id("fare_20200812");
+	private By returnDate = By.id("fare_20200819");
 	private By search = By.id("gi_search_btn");
 	private By sort = By.xpath("/html/body/div[2]/div/div[2]/div/div[2]/div[2]/div[2]/div[2]/div[4]/div[2]/div/ul/li[4]/span/span");
 	private By selectFlight = By.xpath("//*[@id=\"content\"]/div/div[2]/div/div[2]/div[2]/div[2]/div[2]/div[5]/div[2]/div/div[1]/div/div[2]/div[2]/div/span[2]/label");

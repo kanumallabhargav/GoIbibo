@@ -18,7 +18,7 @@ public class Base
 	//method to invoke the desired browser
 	public WebDriver driverInitialize() throws IOException
 	{
-		FileInputStream fis = new FileInputStream(System.getProperty("user.dir")+"\\src\\main\\resources\\config\\browserConfig.properties");
+		FileInputStream fis = new FileInputStream(System.getProperty("user.dir")+"\\src\\main\\sources\\config\\browserConfig.properties");
 		prop.load(fis);
 		String browserName = prop.getProperty("browser");
 		String url = prop.getProperty("url");
