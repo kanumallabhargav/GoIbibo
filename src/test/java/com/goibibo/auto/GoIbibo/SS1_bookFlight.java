@@ -3,7 +3,6 @@ package com.goibibo.auto.GoIbibo;
 import java.io.IOException;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
 
 import com.goibibo.auto.pageObjects.checkoutPageObjects;
@@ -33,7 +32,7 @@ public class SS1_bookFlight extends Base
 		//Enter departure city
 		homeObjects.getFromCityBox().sendKeys(fromCity);
 		@SuppressWarnings("deprecation")
-		WebDriverWait wait=new WebDriverWait(driver, 20);
+		WebDriverWait wait=new WebDriverWait(driver, 30);
 		wait.until(homeObjects.getWaitLocator());
 		homeObjects.getFromCityBox().sendKeys(Keys.DOWN);
 		homeObjects.getFromCityBox().sendKeys(Keys.ENTER);
@@ -63,6 +62,7 @@ public class SS1_bookFlight extends Base
 		checkoutPageObjects checkout = new checkoutPageObjects(driver);
 		//Click on book flight
 		checkout.clickOnBook();
+		wait.until(checkout.getWaitLocator());
 		checkout.clickOnRiskTrip();
 		
 		//enter traveler information
@@ -72,6 +72,7 @@ public class SS1_bookFlight extends Base
 		checkout.getLastNameBox().sendKeys(travelerInformation.getTravelerLastName());
 		checkout.getEmailBox().sendKeys(travelerInformation.getTravelerEmail());
 		checkout.getPhoneBox().sendKeys(travelerInformation.getTravelerPhone());
+		checkout.clickOnProceed();
 		checkout.clickOnOkButton_covidInstructions();
 		checkout.clickOnProceedToPayment();
 		
@@ -85,10 +86,5 @@ public class SS1_bookFlight extends Base
 		
 		//mvn commandLine to be used: mvn test -DtravelerFirstName=someFirstName -DtravelerLastName=someLastName -DtravelerEmail=someEmail -DtravelerPhone=somePhoneNumber
 	}
-	@AfterTest
-	public void cleanUp()
-	{
-		driver.manage().deleteAllCookies();
-		driver.quit();
-	}
+	
 }

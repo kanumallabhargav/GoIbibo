@@ -3,6 +3,8 @@ package com.goibibo.auto.pageObjects;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class checkoutPageObjects 
 {
@@ -11,6 +13,7 @@ public class checkoutPageObjects
 		
 		//WebElements
 		private By bookButton = By.xpath("//*[@id=\"content\"]/div/div[2]/div/div[2]/div[2]/div[2]/div[2]/div[1]/div/div[2]/span[2]/span/input");
+		private ExpectedCondition<WebElement> waitLocator = ExpectedConditions.visibilityOfElementLocated(By.id("risk-trip"));
 		private By riskTripRadio = By.id("risk-trip");
 		private By nameTitle = By.id("Adulttitle1");
 		private By titleSelect = By.xpath("//*[@id=\"Adulttitle1\"]/option[2]");
@@ -18,7 +21,7 @@ public class checkoutPageObjects
 		private By lastNameBox = By.id("AdultlastName1");
 		private By emailBox = By.id("email");
 		private By phoneBox = By.id("mobile");
-		private By proceedButton = By.xpath("//*[@id=\"travellerForm\"]/div[2]/button");
+		private By proceedButton = By.xpath("/html/body/div[2]/div/div/div/div[2]/div/div[1]/div[4]/div/form/div[2]/button");
 		private By acceptCovid19_instructions = By.xpath("//*[@id=\"content\"]/div/div/div/div[2]/div/div[1]/div[5]/div[1]/div[2]/div/div/div[7]/button");
 		private By proceedToPaymentButton = By.xpath("//*[@id=\"addonCard\"]/button");
 		
@@ -33,6 +36,10 @@ public class checkoutPageObjects
 		public void clickOnBook()
 		{
 			driver.findElement(bookButton).click();
+		}
+		public ExpectedCondition<WebElement> getWaitLocator()
+		{
+			return waitLocator;
 		}
 		public void clickOnRiskTrip()
 		{
