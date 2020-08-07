@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" total="1" passed="1">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Default suite" duration-ms="31966" started-at="2020-08-07T13:27:13Z" finished-at="2020-08-07T13:27:45Z">
+    <groups>
+    </groups>
+    <test name="Default test" duration-ms="31966" started-at="2020-08-07T13:27:13Z" finished-at="2020-08-07T13:27:45Z">
+      <class name="com.goibibo.auto.GoIbibo.SS1_bookFlight">
+        <test-method status="PASS" signature="bookFlight()[pri:0, instance:com.goibibo.auto.GoIbibo.SS1_bookFlight@5594a1b5]" name="bookFlight" duration-ms="31948" started-at="2020-08-07T18:57:13Z" finished-at="2020-08-07T18:57:45Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- bookFlight -->
+      </class> <!-- com.goibibo.auto.GoIbibo.SS1_bookFlight -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>
