@@ -18,25 +18,25 @@ public class Base
 	//method to invoke the desired browser
 	public WebDriver driverInitialize() throws IOException
 	{
-		FileInputStream fis = new FileInputStream(System.getProperty("user.dir")+"/src/main/resources/config/browserConfig.properties");
+		FileInputStream fis = new FileInputStream(System.getProperty("user.dir")+"\\src\\main\\resources\\config\\browserConfig.properties");
 		prop.load(fis);
 		String browserName = prop.getProperty("browser");
 		String url = prop.getProperty("url");
 		if(browserName.equalsIgnoreCase("chrome"))
 		{
-			System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir")+"/src/main/resources/drivers/chromedriver");
+			System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir")+"\\src\\main\\resources\\drivers\\chromedriver.exe");
 			driver = new ChromeDriver();
 		}
 		else if(browserName.equalsIgnoreCase("headlessChrome"))
 		{
-			System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir")+"/src/main/resources/drivers/chromedriver");
+			System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir")+"\\src\\main\\resources\\drivers\\chromedriver.exe");
 			ChromeOptions chromeOptionsObject = new ChromeOptions();
 			chromeOptionsObject.addArguments("headless");
 			driver = new ChromeDriver(chromeOptionsObject);
 		}
 		else if(browserName.equalsIgnoreCase("firefox"))
 		{
-			System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir")+"/src/main/resources/drivers/geckodriver");
+			System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir")+"\\src\\main\\resources\\drivers\\geckodriver.exe");
 			driver = new FirefoxDriver();
 		}
 		driver.get(url);
